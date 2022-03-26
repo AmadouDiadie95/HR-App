@@ -1,0 +1,95 @@
+<div th:replace="StartPage"> </div>
+
+    <!-- *************************************************************************************************************************************************** --> 
+
+        <div class="content mt-3">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title" th:text="${associateDetail.name} + ' ' + ${associateDetail.surname} "></strong>
+                                <a th:href="@{/ExportOneAssociateVacationDetail}" class="btn btn-success" style="margin-left: 80%;"> Imprimer en PDF </a>
+                            </div>
+                            <div class="card-body">
+                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Position</th>
+                                            <th>Tel</th>
+                                            <th>Personal Mobile</th>
+                                            <th>Vacations Day Remaining </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td > <a th:href="@{/associate-detail(id=${associateDetail.id})}" th:text="${associateDetail.name} + ' ' + ${associateDetail.surname} " ></a></td>
+                                            <td th:text="${associateDetail.position}"></td>
+                                            <td th:text="${associateDetail.fixeNumber}"></td>
+                                            <td th:text="${associateDetail.phoneNumber}"></td>
+                                            <td th:text="${associateDetail.VacationsRemaining} + ' Days' "></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label> Start Day : </label>
+                                        <p> <strong th:text="${associateDetail.startDay} "> </strong> </p>                               
+                                      </div>
+                                      <div class="col-md-3 form-group">
+                                        <label> Vacations Day Since Started : </label>
+                                        <p> <strong th:text="${associateDetail.vacationsSinceStarted} + ' Days' "> </strong> </p>                               
+                                      </div>
+                                    <div class="col-md-3 form-group">
+                                        <label> Vacations Day Remaining : </label>
+                                        <p> <strong th:text="${associateDetail.VacationsRemaining} + ' Days'"> </strong> </p>                               
+                                      </div>
+                                      <div class="col-md-3"> 
+                                        <a class="btn btn-primary" href="/vacation-add"> Add new Vacation </a>
+                                        </div>
+                                </div>
+                                <div class="row"> 
+                                <div class="form-group col-md-8">
+                                    <label> Details : </label>
+                                    <p> <strong th:text="${associateDetail.name} + ' ' + ${associateDetail.surname} + ' a pris les Congés Suivants : ' "> </strong> </p>  
+                                    <div> 
+                                        <ul>
+                                        <ol th:each = "vacationTaked:${vacationsByAssociate}" > <a th:href="@{/vacation-edit-one(vacationId = ${vacationTaked.id})}" th:text = " '- From  ' + ${vacationTaked.startDay} + '  To  ' +  ${vacationTaked.endDay} + '  For  ' +  ${vacationTaked.numberOfDay} + ' Days '"> 
+                                        </a> </ol>     
+                                        </ul>
+                                    </div>                         
+                                    <!-- <form class="form-control-sm" th:action="@{/vacation-add}" th:object = "${newVacation}" method="post">
+                                            <div class="form-group">
+                                                <label > Vacation Start Day : </label>
+                                                  <input class="form-control" type="date" th:field="*{startDay}">
+                                              </div>
+                                              <div class="form-group">
+                                                  <label for=""> Vacation End Day : </label>
+                                                    <input class="form-control" type="date" th:field="*{endDay}">
+                                                </div>
+                                                <button type="submit" class="btn btn-outline-success"> Confirm & Save </button>
+                                              </form> -->
+                                  </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+
+
+    </div><!-- /#right-panel -->
+
+
+
+<!-- Right Panel -->
+
+ <!-- *************************************************************************************************************************************************** -->    
+
+ <div th:replace="EndPage"> </div> </html>

@@ -1,0 +1,157 @@
+<div th:replace="StartPage"> </div>
+
+<!-- *************************************************************************************************************************************************** --> 
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Forms</a></li>
+                            <li class="active">Basic</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content mt-3">
+
+   
+                <form class="form-row form-control-sm" th:action="@{/associate-update}" th:object="${associateToUpdate}" method="post" enctype="multipart/form-data">
+                    <div class = "col-md-6">
+                    <div class="form-row"> 
+                        <div class="form-group col">
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" id="profile" th:src="${'data:image/jpeg;base64,'+{associateToUpdate.image}}" />
+                                    
+                            <div class="card-body"> 
+                                <h5 class="card-title">Photo</h5>
+                                <div class="custom-file">
+                                <input id="image" type="file" name="file" placeholder="Photo" class="custom-file-input" th:field="*{file}"  capture>
+                                <label class="custom-file-label" ></label>
+                                </div>
+                                
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label> Stagiaire : </label>
+                                    <input type="checkbox" class="checkbox" value="true" th:field="*{stagiaire}">
+                                  </div>
+                                  <div class="form-group col">
+                                    <label> Still Associate ?? : </label>
+                                    <input type="checkbox" class="checkbox" value="true" th:field="*{stillAssociate}">
+                                  </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Salary (Net) : </label>
+                                <input type="text" class="form-control" th:field="*{salary}"  > 
+                              </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-success" style="width: 100%;">Mettre a Jour</button>
+                            </div>
+                        </div>
+                        <div class="col"> 
+                            <div class="form-group">
+                                <label>Name : </label>
+                                <input type="text" class="form-control" th:field="*{name}" required  > 
+                              </div>
+                              <div class="form-group">
+                                <label>Surname :</label>
+                                <input type="text" class="form-control"  th:field="*{surname}">
+                              </div>
+                              <div class="form-group"> 
+                            <label>Department :</label> <br>
+                            <select class="custom-select" th:field="*{department}">
+                                <option th:each="OneDepartment:${allDepartments}" th:value="${OneDepartment.name}" th:text="${OneDepartment.name}">  </option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                                <label >Position :</label>
+                                <input type="text" class="form-control"  th:field="*{position}">
+                            </div>
+                            <div class="form-group">
+                                <label > Fixe Number :</label>
+                                <input type="text" class="form-control" th:field="*{fixeNumber}">
+                            </div>
+                            <div class="form-group">
+                                <label >Adresse</label>
+                                <input type="text" class="form-control"  th:field="*{address}">
+                              </div>
+                    </div>
+                </div>
+                
+                </div>
+                <div class = "col-md-4" style="margin-left: 50px;">
+                    <div class="form-group">
+                        <label > Phone Number :</label>
+                        <input type="text" class="form-control" th:field="*{phoneNumber}">
+                    </div>
+                    <div class="form-group">
+                        <label >Email :</label>
+                        <input type="email" class="form-control" th:field="*{email}">
+                    </div>
+                    <div class="form-group">
+                        <label >Date Of Birth :</label>
+                        <input type="date" class="form-control" th:field="*{birthDay}" >
+                    </div>
+                    <div class="form-group">
+                        <label >Date of Start :</label>
+                        <input type="date" class="form-control" th:field="*{startDay}" >
+                    </div>
+                    <div class="form-group">
+                        <label >Age :</label>
+                        <input type="number" class="form-control" th:field="*{age}" >
+                    </div>
+                    <div class="form-group">
+                        <label> Situation : </label>
+                    <select class="custom-select" th:field="*{situation}">
+                        <option selected value="Single"> Celibataire </option>
+                        <option value="Maried"> Marié </option>
+                        <option value="Divorced"> Divorcé(e) </option>
+                        <option value="Veuf"> Veuf(ve) </option>
+                    </select>
+                    </div>
+                   
+                   
+                        
+                        
+                    
+    
+                </div>
+                  </form>
+                  <script src="jquery.min.js"></script>
+                  <script>
+                      $("#image").change(function() {
+    readURL(this);
+    //other uploading proccess [server side by ajax and form-data ]
+  });
+  
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = function(e) {
+        $('#profile').attr('src', e.target.result);
+      }
+  
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+                  </script>
+        </div> <!-- content-->
+
+        <!-- Right Panel -->
+    
+         <!-- *************************************************************************************************************************************************** -->    
+    
+         <div th:replace="EndPage"> </div> </html>

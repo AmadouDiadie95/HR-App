@@ -1,0 +1,56 @@
+<div th:replace="StartPage"> </div>
+
+    <!-- *************************************************************************************************************************************************** --> 
+
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                        <form th:action="@{/import}" method="post" enctype="multipart/form-data">
+                            <input type="file" th:name="file" />
+                            <input th:type="submit" value="Import" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li class="active">Dashboard</li>
+                            
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content mt-3">
+           
+            <div class="col-lg-3 col-md-4" th:each="department:${allDepartments}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stat-widget-four">
+                            <div class="stat-icon dib">
+                                <i class="ti-user text-muted"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="text-left dib">
+                                    <div class="stat-heading">  <a th:href="@{/associate-list-one-department(departmentName=${department.name})}" th:text="${department.name}" ></a> </div>
+                                    <div class="stat-text" th:text=" 'Total : ' + ${department.totalMember}" ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            </div> <!-- content m-3-->
+
+    <!-- Right Panel -->
+
+     <!-- *************************************************************************************************************************************************** -->    
+
+     <div th:replace="EndPage"> </div> </html>
